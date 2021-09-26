@@ -2,6 +2,7 @@ package com.thickar.todayschutney;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -63,7 +64,10 @@ public class MainActivity extends AppCompatActivity {
                     int result=tts.setLanguage(locale);
                     if(result==TextToSpeech.LANG_MISSING_DATA ||
                             result==TextToSpeech.LANG_NOT_SUPPORTED){
-                        Toast.makeText(MainActivity.this, "This Language is not supported", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, "This Language is not supported, go to text to speech and select Google. Available are: "+tts.getAvailableLanguages(), Toast.LENGTH_LONG).show();
+                        Intent installIntent = new Intent();
+                        installIntent.setAction( TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
+                        startActivity(installIntent);
                     }
 //                    else{
 //                        ConvertTextToSpeech();
